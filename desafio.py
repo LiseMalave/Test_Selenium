@@ -6,8 +6,12 @@ from selenium.webdriver.common.by import By
 
 driver = webdriver.Chrome()
 
-# seleccionamos los elementos
 
+
+driver.get("https://demoqa.com/text-box")
+
+# seleccionamos los elementos
+time.sleep(3)
 user = driver.find_element(By.ID, "userName")
 
 userEmail = driver.find_element(By.ID, "userEmail")
@@ -18,7 +22,7 @@ permanentAddress = driver.find_element(By.ID, "permanentAddress")
 
 btn_submit = driver.find_element(By.ID, "submit")
 
-message = driver.find_element(By.CSS_SELECTOR, "div.col-12:nth-child(2) > div:nth-child(4)")
+
 
 # ingresamos datos
 
@@ -27,10 +31,18 @@ userEmail.send_keys("luca@gmail.com")
 address.send_keys("Rivadavia - argentina")
 permanentAddress.send_keys("Av dorrego 1234")
 
-time.sleep(3)
+
 btn_submit.click()
 
 
-# hacemos la aserción para verificar
+time.sleep(5)
 
-assert message == Name
+message = driver.find_element(By.ID, "email") 
+
+# verificamos
+
+if ("luca@gmail.com" in message.text):
+   print("el texto se encuentra")
+
+time.sleep(3)
+driver.close()
